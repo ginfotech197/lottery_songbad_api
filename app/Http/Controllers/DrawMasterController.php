@@ -8,14 +8,11 @@ use App\Http\Requests\UpdatedrawMasterRequest;
 
 class DrawMasterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function get_draw_time()
     {
-        //
+        $drawMaster = DrawMaster::get();
+        return response()->json(['success'=>1,'data'=>$drawMaster], 200,[],JSON_NUMERIC_CHECK);
     }
 
     /**
