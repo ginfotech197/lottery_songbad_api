@@ -10,6 +10,6 @@ class drawMaster extends Model
     use HasFactory;
 
     protected $hidden = [
-        "created_at","updated_at"
+        "created_at","updated_at","draw_name","active"
     ];
 }

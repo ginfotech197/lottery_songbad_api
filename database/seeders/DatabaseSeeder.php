@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(DrawMasterSeeder::class);
+        $this->call(RankSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }
