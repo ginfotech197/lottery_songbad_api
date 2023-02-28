@@ -27,10 +27,22 @@ class ManualResultController extends Controller
 
     public function get_results($id)
     {
+//        $today= Carbon::today()->subDays(1)->format('Y-m-d');
+        $today= Carbon::today()->format('Y-m-d');
         $manualResult = ManualResult::with('ranks','draw_master')
             ->orderBy('rank_id')
+            ->whereGameDate($today)
             ->whereDrawMasterId($id)
             ->get();
+
+        if(!$manualResult){
+            $today= Carbon::today()->subDays(1)->format('Y-m-d');
+            $manualResult = ManualResult::with('ranks','draw_master')
+                ->orderBy('rank_id')
+                ->whereGameDate($today)
+                ->whereDrawMasterId($id)
+                ->get();
+        }
         return response()->json(['success'=>$manualResult], 200);
     }
 
