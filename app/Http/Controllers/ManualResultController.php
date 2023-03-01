@@ -22,7 +22,7 @@ class ManualResultController extends Controller
         $manualResult->value = $requestedData->value;
         $manualResult->save();
 
-        return response()->json(['success'=>$manualResult], 200);
+        return response()->json(['success'=>1, 'data' => $manualResult], 200);
     }
 
     public function get_results($id)
@@ -43,7 +43,7 @@ class ManualResultController extends Controller
                 ->whereDrawMasterId($id)
                 ->get();
         }
-        return response()->json(['success'=>$manualResult], 200);
+        return response()->json(['success'=>1 , 'data' => $manualResult], 200);
     }
 
     /**
