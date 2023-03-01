@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DrawMasterController;
 use App\Http\Controllers\ManualResultController;
+use App\Http\Controllers\RankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('getDrawTime', [DrawMasterController::class, 'get_draw_time']);
 Route::post('saveManualResult', [ManualResultController::class, 'save_manual_result']);
 Route::get('getResults/{id}', [ManualResultController::class, 'get_results']);
+Route::get('getRanks', [RankController::class, 'get_rank']);
