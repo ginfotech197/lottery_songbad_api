@@ -15,12 +15,12 @@ class RankSeeder extends Seeder
     public function run()
     {
         Rank::insert([
-            ['rank_name'=> '1st Prize'],
-            ['rank_name'=> '2nd Prize'],
-            ['rank_name'=> '3rd Prize'],
-            ['rank_name'=> '4th Prize'],
-            ['rank_name'=> '5th Prize'],
-            ['rank_name'=> '6th Prize']
+            ['rank_name'=> '1st Prize','prize' => 900],
+            ['rank_name'=> '2nd Prize','prize' => 800],
+            ['rank_name'=> '3rd Prize','prize' => 700],
+            ['rank_name'=> '4th Prize','prize' => 600],
+            ['rank_name'=> '5th Prize','prize' => 500],
+            ['rank_name'=> '6th Prize','prize' => 400]
         ]);
     }
 }

@@ -16,6 +16,7 @@ class CreateRanksTable extends Migration
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
             $table->string('rank_name');
+            $table->string('prize');
             $table->timestamps();
         });
     }
