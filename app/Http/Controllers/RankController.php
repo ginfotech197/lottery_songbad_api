@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rank;
 use App\Http\Requests\StoreRankRequest;
 use App\Http\Requests\UpdateRankRequest;
+use Illuminate\Http\Request;
 
 class RankController extends Controller
 {
@@ -14,14 +15,14 @@ class RankController extends Controller
         return response()->json(['success'=>1,'data'=>$ranks], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update_rank(Request $request)
     {
-        //
+        $requestedData = (object)$request->json()->all();
+        $rank = Rank::find($requestedData->id);
+        $rank->prize = $requestedData->prize;
+        $rank->update();
+
+        return response()->json(['success'=>1,'data'=>$rank], 200,[],JSON_NUMERIC_CHECK);
     }
 
     /**
