@@ -29,7 +29,7 @@ class ManualResultController extends Controller
     {
 //        $today= Carbon::today()->subDays(1)->format('Y-m-d');
         $today= Carbon::today()->format('Y-m-d');
-        $manualResult = ManualResult::with('ranks')->with('drawMasters')
+        $manualResult = ManualResult::with('ranks')
             ->orderBy('rank_id')
             ->whereGameDate($today)
             ->whereDrawMasterId($id)
