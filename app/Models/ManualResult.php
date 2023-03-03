@@ -18,7 +18,7 @@ class ManualResult extends Model
     }
 
     public function drawMasters(){
-        return $this->belongsTo(DrawMaster::class,'draw_master_id');
+        return $this->belongsTo(drawMaster::class,'draw_master_id');
     }
 
 }
