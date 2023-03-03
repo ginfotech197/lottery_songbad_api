@@ -17,7 +17,7 @@ class ManualResult extends Model
         return $this->belongsTo(Rank::class,'rank_id');
     }
 
-    public function draw_master(){
+    public function drawMasters(){
         return $this->belongsTo(DrawMaster::class,'draw_master_id');
     }
 
