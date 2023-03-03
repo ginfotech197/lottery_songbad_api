@@ -35,14 +35,14 @@ class ManualResultController extends Controller
             ->whereDrawMasterId($id)
             ->get();
 
-        if(!$manualResult){
-            $today= Carbon::today()->subDays(1)->format('Y-m-d');
-            $manualResult = ManualResult::with('ranks','drawMasters')
-                ->orderBy('rank_id')
-                ->whereGameDate($today)
-                ->whereDrawMasterId($id)
-                ->get();
-        }
+//        if(!$manualResult){
+//            $today= Carbon::today()->subDays(1)->format('Y-m-d');
+//            $manualResult = ManualResult::with('ranks','drawMasters')
+//                ->orderBy('rank_id')
+//                ->whereGameDate($today)
+//                ->whereDrawMasterId($id)
+//                ->get();
+//        }
         return response()->json(['success'=>1 , 'data' => $manualResult], 200);
     }
 
