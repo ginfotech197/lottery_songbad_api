@@ -23,6 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('getDrawTime', [DrawMasterController::class, 'get_draw_time']);
 Route::post('saveManualResult', [ManualResultController::class, 'save_manual_result']);
-Route::get('getResults/{id}', [ManualResultController::class, 'get_results']);
+Route::get('getResults', [ManualResultController::class, 'get_results']);
 Route::get('getRanks', [RankController::class, 'get_rank']);
 Route::patch('updateRank', [RankController::class, 'update_rank']);

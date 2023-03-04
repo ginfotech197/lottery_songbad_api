@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\ManualResult;
 use App\Http\Requests\StoreManualResultRequest;
 use App\Http\Requests\UpdateManualResultRequest;
+use App\Models\Rank;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ManualResultController extends Controller
 {
@@ -19,30 +21,30 @@ class ManualResultController extends Controller
         $manualResult->draw_master_id = $requestedData->drawMasterId;
         $manualResult->rank_id = $requestedData->rankId;
         $manualResult->game_date = $today;
+        $manualResult->rank_prize_value = Rank::find($requestedData->rankId)->prize;
         $manualResult->value = $requestedData->value;
         $manualResult->save();
 
         return response()->json(['success'=>1, 'data' => $manualResult], 200);
     }
 
-    public function get_results($id)
+    public function get_results()
     {
 //        $today= Carbon::today()->subDays(1)->format('Y-m-d');
-        $today= Carbon::today()->format('Y-m-d');
+        $today= DB::select("select game_date from manual_results order by id desc limit 1")[0]->game_date;
         $manualResult = ManualResult::with('ranks','draw_master')
             ->orderBy('rank_id')
             ->whereGameDate($today)
-            ->whereDrawMasterId($id)
             ->get();
 
-        if(!$manualResult){
-            $today= Carbon::today()->subDays(1)->format('Y-m-d');
-            $manualResult = ManualResult::with('ranks','draw_master')
-                ->orderBy('rank_id')
-                ->whereGameDate($today)
-                ->whereDrawMasterId($id)
-                ->get();
-        }
+//        if(!$manualResult){
+//            $today= Carbon::today()->subDays(1)->format('Y-m-d');
+//            $manualResult = ManualResult::with('ranks','draw_master')
+//                ->orderBy('rank_id')
+//                ->whereGameDate($today)
+//                ->whereDrawMasterId($id)
+//                ->get();
+//        }
         return response()->json(['success'=>1 , 'data' => $manualResult], 200);
     }
 

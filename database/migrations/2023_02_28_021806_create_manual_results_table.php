@@ -18,6 +18,7 @@ class CreateManualResultsTable extends Migration
             $table ->foreignId('draw_master_id')->references('id')->on('draw_masters')->onDelete('cascade');
             $table ->foreignId('rank_id')->references('id')->on('ranks')->onDelete('cascade');
             $table->date('game_date');
+            $table->string('rank_prize_value');
             $table->string('value');
             $table->timestamps();
         });
