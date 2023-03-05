@@ -7,6 +7,7 @@ use App\Http\Requests\StoreManualResultRequest;
 use App\Http\Requests\UpdateManualResultRequest;
 use App\Models\Rank;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,16 +15,21 @@ class ManualResultController extends Controller
 {
     public function save_manual_result(Request $request)
     {
-        $requestedData = (object)$request->json()->all();
+        $requestedData = $request->json()->all();
+
+//        return response()->json(['success'=>1, 'data' => $requestedData[0]], 200);
 
         $today= Carbon::today()->format('Y-m-d');
-        $manualResult = new ManualResult();
-        $manualResult->draw_master_id = $requestedData->drawMasterId;
-        $manualResult->rank_id = $requestedData->rankId;
-        $manualResult->game_date = $today;
-        $manualResult->rank_prize_value = Rank::find($requestedData->rankId)->prize;
-        $manualResult->value = $requestedData->value;
-        $manualResult->save();
+
+        foreach ($requestedData as $data){
+            $manualResult = new ManualResult();
+            $manualResult->draw_master_id = $data['drawMasterId'];
+            $manualResult->rank_id = $data['rankId'];
+            $manualResult->game_date = $today;
+            $manualResult->rank_prize_value = Rank::find($data['rankId'])->prize;
+            $manualResult->value = $data['value'];
+            $manualResult->save();
+        }
 
         return response()->json(['success'=>1, 'data' => $manualResult], 200);
     }
