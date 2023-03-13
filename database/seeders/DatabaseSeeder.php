@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DrawMasterSeeder::class);
         $this->call(RankSeeder::class);
+        $this->call(GameMessageSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

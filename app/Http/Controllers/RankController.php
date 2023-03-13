@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Rank;
 use App\Http\Requests\StoreRankRequest;
 use App\Http\Requests\UpdateRankRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RankController extends Controller
 {
@@ -17,10 +19,13 @@ class RankController extends Controller
 
     public function update_rank(Request $request)
     {
+        $today= Carbon::today()->format('Y-m-d');
         $requestedData = (object)$request->json()->all();
         $rank = Rank::find($requestedData->id);
         $rank->prize = $requestedData->prize;
         $rank->update();
+
+        DB::select("update manual_results set rank_prize_value = $requestedData->prize where game_date = $today and rank_id = $requestedData->id");
 
         return response()->json(['success'=>1,'data'=>$rank], 200,[],JSON_NUMERIC_CHECK);
     }
