@@ -40,6 +40,7 @@ class ManualResultController extends Controller
         $today= DB::select("select game_date from manual_results order by id desc limit 1")[0]->game_date;
         $manualResult = ManualResult::with('ranks','draw_master')
             ->orderBy('rank_id')
+            ->wherePublished(1)
             ->whereGameDate($today)
             ->get();
 
@@ -54,15 +55,13 @@ class ManualResultController extends Controller
         return response()->json(['success'=>1 , 'data' => $manualResult], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreManualResultRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreManualResultRequest $request)
+
+    public function update_published(Request $request)
     {
-        //
+        $requestedData = (object)$request->json()->all();
+        $today= Carbon::today()->format('Y-m-d');
+        $updatePublish = DB::select("update manual_results set published = 1 where game_date =$today and draw_master_id = $requestedData->draw_master_id ");
+        return response()->json(['success'=>1 ], 200);
     }
 
     /**

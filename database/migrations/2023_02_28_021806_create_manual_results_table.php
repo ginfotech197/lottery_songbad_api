@@ -20,6 +20,7 @@ class CreateManualResultsTable extends Migration
             $table->date('game_date');
             $table->string('rank_prize_value')->nullable(false);
             $table->string('value');
+            $table->tinyInteger('published')->default(0);
             $table->timestamps();
         });
     }
