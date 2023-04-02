@@ -31,4 +31,4 @@ Route::get('getGameMessage', [GameMessageController::class, 'get_game_message'])
 Route::patch('updateGameMessage', [GameMessageController::class, 'update_game_message']);
 
 
-Route::patch('updatePublished', [GameMessageController::class, 'update_published']);
+Route::patch('updatePublished', [ManualResultController::class, 'update_published']);

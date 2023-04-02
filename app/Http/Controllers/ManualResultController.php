@@ -59,8 +59,10 @@ class ManualResultController extends Controller
     public function update_published(Request $request)
     {
         $requestedData = (object)$request->json()->all();
+//        return $requestedData;
         $today= Carbon::today()->format('Y-m-d');
-        $updatePublish = DB::select("update manual_results set published = 1 where game_date =$today and draw_master_id = $requestedData->draw_master_id ");
+
+        $updatePublish = DB::select("update manual_results set published = 1 where game_date ='$today' and draw_master_id = $requestedData->draw_master_id ");
         return response()->json(['success'=>1 ], 200);
     }
 
